@@ -13,7 +13,7 @@ function FeedbackList({feedback, handleDelete}) {
                   item={item}
                   handleDelete={handleDelete}
                 />);
-            })}s
+            })}
         </div>)
 }
 
