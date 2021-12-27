@@ -1,43 +1,57 @@
-import Card from "./Shared/Card";
 import { useState } from "react";
-import Button from "./Shared/Button";
 import RatingSelect from "./RatingSelect";
+import Card from "./Shared/Card"
+import Button from "./Shared/Button";
 
-function FeedbackForm() {
-  const [rating, setRating] = useState(10);
+function FeedbackForm({handleAdd}) {
   const [text, setText] = useState("");
+  const [rating, setRating] = useState(10);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState("");
 
+
   const handleTextChange = (e) => {
-    if (text === '') {
-      setBtnDisabled(true)
-      setMessage(null)
-    } else if (text !== '' && text.trim().length <= 10) {
-      setMessage('Text must be at least 10 characters')
-      setBtnDisabled(true)
+    if (text === "") {
+      setBtnDisabled(true);
+      setMessage(null);
+    } else if (text !== "" && text.trim().length <= 10) {
+      setMessage("Text must be at least 10 characters");
+      setBtnDisabled(true);
     } else {
-      setMessage(null)
-      setBtnDisabled(false)
+      setMessage(null);
+      setBtnDisabled(false);
     }
 
-    setText(e.target.value)
-  }
+    setText(e.target.value);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      };
+
+      handleAdd(newFeedback);
+
+      setText("");
+    }
+  };
 
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
-        <RatingSelect select={ratingValue => setRating(ratingValue)} />
-        <div className='input-group'>
+        <RatingSelect select={(ratingValue) => setRating(ratingValue)} />
+        <div className="input-group">
           <input
             onChange={handleTextChange}
-            type='text'
-            placeholder='Write a review'
+            type="text"
+            placeholder="Write a review"
             value={text}
           />
-          <Button type='submit' isDisabled={btnDisabled}>
+          <Button type="submit" isDisabled={btnDisabled}>
             Send
           </Button>
         </div>
