@@ -63,6 +63,7 @@ header {
 .num-display {
   position: relative;
   background: #f4f4f4;
+  color: black;
   width: 50px;
   height: 50px;
   padding: 10px;
@@ -146,10 +147,9 @@ input:focus {
 }
 
 .btn {
-  color: #fff;
+  color: #ffff;
   border: 0;
   border-radius: 8px;
-  color: #fff;
   width: 100px;
   height: 40px;
   cursor: pointer;
